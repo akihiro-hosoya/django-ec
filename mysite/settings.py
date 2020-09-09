@@ -140,3 +140,7 @@ ACCOUNT_USERNAME_REQUIRED = False
 # 画像
 IMAGE_URL = '/images/'
 IMAGE_ROOT = os.path.join(BASE_DIR, 'images')
+
+# stripe
+# テストが完了したら、環境変数にする
+STRIPE_SECRET_KEY = 'sk_test_51HPO2EBnQmsMK7YbOjnOOD00hcWFLuRggUwpOCjXXw1SM0IjEIhF7OYGL1FJhMimB9GycnNtC59MqhEUBNdjADQh00CyMkEdyS'

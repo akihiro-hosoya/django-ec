@@ -27,6 +27,17 @@ main {
     object-fit: contain;
 }
 
+/* order */
+.order img {
+    height: 100px;
+    object-fit: contain;
+}
+
+
+
+
+
+
 /* ---------- accounts ---------- */
 .card-profile {
     width: 700px;
@@ -77,8 +88,6 @@ main {
 .form-control:focus {
     box-shadow: none;
 }
-
-
 
 /* ログイン画面 */
 .card-auth {

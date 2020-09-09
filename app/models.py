@@ -19,9 +19,11 @@ class OrderItem(models.Model):
     item = models.ForeignKey(Item, on_delete=models.CASCADE)
     quantity = models.IntegerField(default=1)
 
+    # 各アイテムの金額（数量＊金額）
     def get_total_item_price(self):
         return self.quantity * self.item.price
 
+    # アイテム名：数量を文字列にフォーマットする
     def __str__(self):
         return f"{self.item.title}：{self.quantity}"
 
@@ -31,12 +33,24 @@ class Order(models.Model):
     start_date = models.DateTimeField(auto_now_add=True)
     ordered_date = models.DateTimeField()
     ordered = models.BooleanField(default=False)
+    payment = models.ForeignKey('Payment', on_delete=models.SET_NULL, blank=True, null=True)
 
+    # 小計
     def get_total(self):
         total = 0
         for order_item in self.items.all():
             total += order_item.get_total_item_price()
         return total
+
+    # 購入者のemailが表示
+    def __str__(self):
+        return self.user.email
+
+class Payment(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, blank=True, null=True)
+    stripe_charge_id = models.CharField(max_length=50)
+    amount = models.IntegerField()
+    timestamp = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.user.email
